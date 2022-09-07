@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+</head>
+<body>
+    <h1>React</h1>
+    <div id="root" onclick="doCount();">wait...</div>
+    <script type="text/babel">
+        let dom = document.querySelector('#root');
+        let color_3 = 'black';
+
+        const dfn  = {
+            fontSize:'20pt',
+            padding:'10px',
+        }
+        const dt = {
+            fontSize:'16pt',
+            color:'white',
+            backgroundColor:'#006',
+            padding:'10px',
+        }
+        const dd = {
+            color:color_3,
+            padding:'10px',
+        }
+        let data = {
+            url:'https://google.com',
+            title:'Google',
+            caption:'Googleの検索サイトです.'
+        };
+
+        let e1 = (
+            <div>
+                {(()=>
+                <dl>
+                    <dt style={dt}>
+                        <dfn style={dfn}>
+                        {data.title}
+                        </dfn>
+                    </dt>
+                    <dd style={dd}>
+                        {data.caption}
+                    </dd>
+                    <dd style={dd}>
+                        <a href={data.url}>※{data.title}に移動</a>
+                    </dd>
+                </dl>
+                )()}
+            </div>
+        
+        );
+        ReactDOM.render(e1, dom);
+    </script>
+</body>

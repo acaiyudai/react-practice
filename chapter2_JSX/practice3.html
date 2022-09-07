@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+</head>
+<body>
+    <h1>React</h1>
+    <div id="root" onclick="doCount();">wait...</div>
+    <script type="text/babel">
+        let dom = document.querySelector('#root');
+        
+        const table = {
+            fontSize:'18pt',
+            padding:'5px 50px',
+        }
+        const th = {
+            color:'white',
+            backgroundColor:'#006',
+            padding:'5px 15px',
+        }
+        const td = {
+            color:'black',
+            padding:'5px 15px',
+            border:'1px solid gray',
+        }
+
+
+        let data = [
+            {name:'taeyeon', mail:'taeyeon@snsd', age:30},
+            {name:'seulgi', mail:'seulgi@red', age:26},
+            {name:'irene', mail:'irene@red', age:26},
+        ];
+
+        let e1 = (
+            <div>
+                <table style={table}>
+                <tr>
+                    <th style={th}>name</th>
+                    <th style={th}>mail</th>
+                    <th style={th}>age</th>
+                </tr>
+                {data.map((value) =>(
+                <tr>
+                    <td style={td}>{value.name}</td>
+                    <td style={td}>{value.mail}</td>
+                    <td style={td}>{value.age}</td>
+                </tr>
+                ))}
+                </table>    
+            </div>
+        );
+        ReactDOM.render(e1, dom);
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+</head>
+<body>
+    <h1>React</h1>
+    <div id="root" onclick="doCount();">wait...</div>
+    <script type="text/babel">
+        let dom = document.querySelector('#root');
+
+        let title = '新タイトル';
+        let message = '新しいメッセージです。';
+        let link = 'https://google.com';
+        const msg_s = {
+            fontSize:'20pt',
+            fontWeight:'bold',
+            color:'blue',
+            border:'1px solid blue'
+        }
+
+        let printMsg = function(msg, size, color){
+            const style = {
+                fontSize: size + 'pt',
+                fontWeight:'700',
+                color: color,
+                border:'1px solid ' + color
+            };
+            return <p style={style}>{msg}</p>;
+        };
+
+        let fig = true;
+
+        let e1 = (
+            <div>
+                <h2>{title}</h2>
+                <p>{message}</p>
+                <p><a href={link}>this is link!</a></p>
+                <p style={msg_s}>{message}</p>
+                {printMsg('メッセージ１', 30, '#ddd')}
+                {printMsg('メッセージ2', 20, '#aaa')}
+                {printMsg('メッセージ3', 10, '#333')}
+                {fig &&
+                    <p style={msg_s}>Russian Roulette!</p>
+                }
+                {fig ?
+                    <p style={msg_s}>Knock Knock!</p>
+                    :
+                    <p style={msg_s}>Yes or Yes!</p>
+                }
+            </div>
+        );
+        ReactDOM.render(e1, dom);
+
+    </script>
+
+</body>
+</html>
