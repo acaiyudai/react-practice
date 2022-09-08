@@ -1,87 +1,84 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
-//import Rect from './Rect';
 
 class App extends Component {
-  data = [
-    'This is list sample.',
-    'これはリストのサンプルです.',
-    '配列をリストに変換します.'
-  ];
+  /*-- field --*/
+  input = '';
 
   msgStyle = {
-    fontSize:'20px',
+    fontSize:'20pt',
     color:'#900',
-    margin:'20px 0px',
+    margin:'10px 0px',
     padding:'5px'
   }
 
+  /*-- method --*/
   constructor(props){
     super(props);
     this.state = {
-      list:this.data
+      message:'type your name.'
     };
+    this.doChange = this.doChange.bind(this);
+    this.doSubmit = this.doSubmit.bind(this);
+  }
+
+  doChange(event){
+    this.input = event.target.value;
+  }
+
+  doSubmit(event){
+    this.setState({
+      message:'Hello, ' + this.input + '!'
+    });
+    event.preventDefault();
   }
 
   render(){
-    return (
-    <div>
-      <h1>React</h1>
-      <h2 style={this.msgStyle}>show list.</h2>
-      <List title='サンプルリスト' data={this.data} />
-    </div>
-    );
-  }
-}
-
-class List extends Component {
-  number = 1;
-
-  titleStyle = {
-    fontSize:'20pt',
-    fontWeight:'bold',
-    color:'blue'
-  }
-
-  render(){
-    let data = this.props.data;
     return (
       <div>
-        <p style={this.titleStyle}>{this.props.title}</p>
-        <ul>
-          {data.map((item) => 
-            <Item number={this.number++} value={item} key={this.number} />
-          )}
-
-        </ul>
+        <h1>React</h1>
+        <Message title='Children!'>
+          これはコンポーネント内のコンテンツです.
+          マルでテキストを分割し、リストにして表示します.
+          改行は必要ありません.
+        </Message>
       </div>
     );
-
   }
+
 }
 
-class Item extends Component {
-  li = {
-    listStyleType:'square',
+class Message extends Component {
+  /*-- field --*/
+  liStyle = {
     fontSize:'16pt',
+    color:'#06',
     margin:'0px',
-    padding:'0px',
+    padding:'0px'
   }
-
-  num = {
-    fontWeight:'bold',
-    color:'red',
-  }
-
+  /*-- method --*/
   render(){
+    let content = this.props.children;
+    let arr = content.split('.');
+    let arr2 = [];
+    for (let i = 0; i < arr.length; i++){
+      if (arr[i].trim() != ''){
+        arr2.push(arr[i]);
+      }
+    }
+    let list = arr2.map((value, key)=>(
+      <li style={this.liStyle} key={key}>{value}.</li>
+    ));
+
     return (
-      <li style={this.li}>
-        <span style={this.num}>[{this.props.number}] </span>
-        {this.props.value}
-      </li>
+      <div>
+        <h2>{this.props.title}</h2>
+        <ol>{list}</ol>
+      </div>
     );
   }
 }
+
+
 
 export default App;
