@@ -4,58 +4,59 @@ import './App.css';
 /*---------------------------------------------------------------
 コンポーネント間で共通の変数'SampleContext'を利用できる機能'Context'.
 指定した場所にのみ変更を加えられる'Context.Provider'.
+今回はContextを利用したテーマ作成.
 -----------------------------------------------------------------*/
 
-let data = {
-  title:'title',
-  message:'this is sample message.'
+let theme = {
+  light:{
+    backgroundColor:'#eef',
+    color:'#006',
+    padding:'10px'
+  },
+  dark:{
+    backgroundColor:'#006',
+    color:'#eef',
+    padding:'10px'
+  }
 };
 
-const SampleContext = React.createContext(data);
+const ThemeContext = React.createContext(theme.dark);
 
 class App extends Component {
   /*-- field --*/
-  newdata = {
-    title:'new title',
-    message:'this is new message.'
-  };
+  static contextType = ThemeContext;
   /*-- method --*/
   render(){
     return (
       <div>
-        <h1>Context</h1>
-        <Title />
-        <Message />
-        <SampleContext.Provider value={this.newdata} >
-        <Title />
-        <Message />
-        </SampleContext.Provider>
-        <Title />
-        <Message />
+        <Title value='Context page' />
+        <Message value='this is Context sample.' />
+        <Message value='※これはテーマのサンプルです.' />
       </div>
     );
   }
 }
 
 class Title extends Component {
-  static contextType = SampleContext;
-
+  /*-- field --*/
+  static contextType = ThemeContext;
+  /*-- method --*/
   render(){
     return (
       <div>
-        <h2>{this.context.title}</h2>
+        <h2 style={this.context}>{this.props.value}</h2>
       </div>
     );
   }
 }
-
 class Message extends Component {
-  static contextType = SampleContext;
-
+  /*-- field --*/
+  static contextType = ThemeContext;
+  /*-- method --*/
   render(){
     return (
       <div>
-        <p>{this.context.message}</p>
+        <p style={this.context}>{this.props.value}</p>
       </div>
     );
   }
