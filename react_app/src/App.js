@@ -15,7 +15,7 @@ class App extends Component {
 
   btnStyle = {
     fontSize:'20px',
-    padding:'0px 10px',
+    padding:'0px 10px'
   }
 
   constructor(props){
@@ -39,7 +39,7 @@ class App extends Component {
       <div>
         <h1>React</h1>
         <p style={this.msgStyle}>{this.state.msg}</p>
-        <button style={btnStyle} onClick={this.doAction}>Click</button>
+        <button style={this.btnStyle} onClick={this.doAction}>Click</button>
       </div>
     );
 
