@@ -1,4 +1,4 @@
-import Article from './features/Article';
+import {Article, TextInput, Counter, ToggleButton} from './features/index';
 import './App.css';
 
 function App() {
@@ -12,6 +12,9 @@ function App() {
         title={'Twice'}
         content={'Sana Mina'}
       />
+      <TextInput />
+      <Counter />
+      <ToggleButton />
     </div>
   );
 }
