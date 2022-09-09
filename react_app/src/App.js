@@ -1,65 +1,93 @@
 import React, { Component } from 'react';
 import './App.css';
+/*-- 追記 --*/
+import { connect } from 'react-redux';
 
 /*---------------------------------------------------------------
-コンポーネント間で共通の変数'SampleContext'を利用できる機能'Context'.
-指定した場所にのみ変更を加えられる'Context.Provider'.
-今回はContextを利用したテーマ作成.
+コンポーネント間で共通の変数格納庫(ストア)を利用できるライブラリ'Redux'.
+App.jsだけでなく、index.js側も編集している.
+index.js側でReduxの設定を行っている.
 -----------------------------------------------------------------*/
 
-let theme = {
-  light:{
-    backgroundColor:'#eef',
-    color:'#006',
-    padding:'10px'
-  },
-  dark:{
-    backgroundColor:'#006',
-    color:'#eef',
-    padding:'10px'
-  }
-};
+// ステートのマッピング
+function mappingState(state){
+  return state;
+}
 
-const ThemeContext = React.createContext(theme.dark);
-
+// Appコンポーネント
 class App extends Component {
-  /*-- field --*/
-  static contextType = ThemeContext;
-  /*-- method --*/
-  render(){
-    return (
-      <div>
-        <Title value='Context page' />
-        <Message value='this is Context sample.' />
-        <Message value='※これはテーマのサンプルです.' />
-      </div>
-    );
-  }
-}
 
-class Title extends Component {
-  /*-- field --*/
-  static contextType = ThemeContext;
-  /*-- method --*/
+  constructor(props){
+    super(props);
+  }
+
   render(){
     return (
       <div>
-        <h2 style={this.context}>{this.props.value}</h2>
+        <h1>Redux</h1>
+        <Message />
+        <Button />
       </div>
     );
   }
 }
+// ストアのコネクト
+App = connect()(App);
+
+// Messageコンポーネント
 class Message extends Component {
-  /*-- field --*/
-  static contextType = ThemeContext;
-  /*-- method --*/
+  style = {
+    fontSize:'20pt',
+    padding:'20px 5px'
+  }
+
+  constructor(props){
+    super(props);
+  }
+
   render(){
     return (
-      <div>
-        <p style={this.context}>{this.props.value}</p>
-      </div>
+      <p style={this.style}>
+        {this.props.message} : {this.props.counter}
+      </p>
     );
   }
 }
+// ストアのコネクト
+Message = connect(mappingState)(Message);
 
+// Buttonコンポーネント
+class Button extends Component {
+  style = {
+    fontSize:'16pt',
+    padding:'5px 10px'
+  }
+
+  constructor(props){
+    super(props);
+    this.doAction = this.doAction.bind(this);
+  }
+
+  // ボタンクリックでディスパッチを実行
+  doAction(e){
+    if (e.shiftKey){
+      this.props.dispatch({type:'DECREMENT'});
+    } else {
+      this.props.dispatch({type:'INCREMENT'});
+    }
+  }
+
+  render(){
+    return (
+      <button style={this.style} onClick={this.doAction}>
+        Click
+      </button>
+    );
+  }
+}
+// ストアのコネクト
+Button = connect()(Button);
+
+
+/*-- 追記(ここまで) --*/
 export default App;
