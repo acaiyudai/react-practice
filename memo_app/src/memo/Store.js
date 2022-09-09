@@ -53,10 +53,10 @@ function findReduce(state, action){
         }
     });
     return {
-        data:state.data,
+        data: state.data,
         message:'find "' + f + '":',
         mode:'find',
-        fdata:fdata
+        fdata: fdata
     };
 }
 
