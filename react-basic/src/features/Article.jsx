@@ -3,7 +3,6 @@ import {PublishButton} from './index';
 
 const Article = (props) => {
     const [isPublished, setIsPublished] = useState(false);
-    console.log(isPublished);
     const publishArticle = () => {
         setIsPublished(true);
     }
