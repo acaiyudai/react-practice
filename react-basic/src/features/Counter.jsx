@@ -40,7 +40,7 @@ const Counter = () => {
 
     // countの変更後にのみ実行される
     useEffect(() => {
-        console.log('Current count is...', count);
+        // console.log('Current count is...', count);
     }, [count]);
 
 

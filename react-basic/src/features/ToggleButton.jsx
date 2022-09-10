@@ -7,15 +7,15 @@ const ToggleButton = () => {
     };
 
     useEffect(() => {
-        console.log('Current state is', open);
+        // console.log('Current state is', open);
         if (open) {
-            console.log('Subscribe database...');
+            // console.log('Subscribe database...');
         }
         // 下はクリーンアップ関数
         // 再レンダリングが実行される直前に必ず実行される.
         // データベースやAPIの購読を行う際に用いる.
         return () => {
-            console.log('Unsubscribe database!');
+            // console.log('Unsubscribe database!');
         };
     });
 
